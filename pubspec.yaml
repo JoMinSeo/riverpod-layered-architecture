@@ -25,6 +25,7 @@ dev_dependencies:
   build_runner:
   riverpod_generator:
   custom_lint:
+  go_router_builder:
 
 flutter:
   uses-material-design: true

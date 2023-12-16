@@ -3,6 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_layered_architecture/router/app_router_interceptor.dart';
 import 'package:riverpod_layered_architecture/router/router_notifier.dart';
 import 'package:go_router/go_router.dart';
+import 'package:riverpod_layered_architecture/router/routes.dart';
 
 part 'router.g.dart';
 
@@ -34,6 +35,6 @@ class AppRouter {
       return null;
     },
     debugLogDiagnostics: true,
-    routes: [],
+    routes: $appRoutes,
   );
 }
