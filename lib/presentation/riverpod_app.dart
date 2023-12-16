@@ -1,5 +1,6 @@
 import 'package:riverpod_layered_architecture/core_packages.dart';
 import 'package:riverpod_layered_architecture/router/router.dart';
+import 'package:riverpod_layered_architecture/styles/styles.dart';
 
 class RiverPodApp extends ConsumerWidget {
   const RiverPodApp({super.key});
@@ -11,12 +12,7 @@ class RiverPodApp extends ConsumerWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: '리버팟 샘플 앱',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF6831D7),
-        ),
-      ),
+      theme: $styles.themes.light,
       routerConfig: router.config,
     );
   }
