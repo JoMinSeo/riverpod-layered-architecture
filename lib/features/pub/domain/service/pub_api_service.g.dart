@@ -21,9 +21,12 @@ class _PubService implements PubService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<PubPackagesResponse>> getPackages() async {
+  Future<HttpResponse<PubPackagesResponse>> getPackages(
+    int page,
+    dynamic cancelToken,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'page': page};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -37,6 +40,7 @@ class _PubService implements PubService {
               '/packages',
               queryParameters: queryParameters,
               data: _data,
+              cancelToken: cancelToken,
             )
             .copyWith(
                 baseUrl: _combineBaseUrls(
@@ -49,13 +53,20 @@ class _PubService implements PubService {
   }
 
   @override
-  Future<HttpResponse<List<SearchPackage>>> searchPackages() async {
+  Future<HttpResponse<PubSearchResponse>> searchPackages(
+    int page,
+    String search,
+    dynamic cancelToken,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'q': search,
+    };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<HttpResponse<List<SearchPackage>>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<PubSearchResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -65,21 +76,23 @@ class _PubService implements PubService {
               '/search',
               queryParameters: queryParameters,
               data: _data,
+              cancelToken: cancelToken,
             )
             .copyWith(
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => SearchPackage.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = PubSearchResponse.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<Package>> getPackageDetails() async {
+  Future<HttpResponse<Package>> getPackageDetails(
+    String packageName,
+    dynamic cancelToken,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -92,9 +105,10 @@ class _PubService implements PubService {
     )
             .compose(
               _dio.options,
-              '/packages/{packageName}',
+              '/packages/${packageName}',
               queryParameters: queryParameters,
               data: _data,
+              cancelToken: cancelToken,
             )
             .copyWith(
                 baseUrl: _combineBaseUrls(
@@ -107,7 +121,10 @@ class _PubService implements PubService {
   }
 
   @override
-  Future<HttpResponse<PackageMetricsScore>> getPackageMetrics() async {
+  Future<HttpResponse<PackageMetricsScore>> getPackageMetrics(
+    String packageName,
+    dynamic cancelToken,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -120,9 +137,10 @@ class _PubService implements PubService {
     )
             .compose(
               _dio.options,
-              '/packages/{packageName}/metrics',
+              '/packages/${packageName}/metrics',
               queryParameters: queryParameters,
               data: _data,
+              cancelToken: cancelToken,
             )
             .copyWith(
                 baseUrl: _combineBaseUrls(
@@ -135,7 +153,10 @@ class _PubService implements PubService {
   }
 
   @override
-  Future<HttpResponse<void>> like() async {
+  Future<HttpResponse<void>> like(
+    String packageName,
+    dynamic cancelToken,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -148,9 +169,10 @@ class _PubService implements PubService {
     )
             .compose(
               _dio.options,
-              '/account/likes/{packageName}',
+              '/account/likes/${packageName}',
               queryParameters: queryParameters,
               data: _data,
+              cancelToken: cancelToken,
             )
             .copyWith(
                 baseUrl: _combineBaseUrls(
@@ -162,7 +184,10 @@ class _PubService implements PubService {
   }
 
   @override
-  Future<HttpResponse<void>> unlike() async {
+  Future<HttpResponse<void>> unlike(
+    String packageName,
+    dynamic cancelToken,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -175,9 +200,10 @@ class _PubService implements PubService {
     )
             .compose(
               _dio.options,
-              '/account/likes/{packageName}',
+              '/account/likes/${packageName}',
               queryParameters: queryParameters,
               data: _data,
+              cancelToken: cancelToken,
             )
             .copyWith(
                 baseUrl: _combineBaseUrls(
@@ -189,7 +215,8 @@ class _PubService implements PubService {
   }
 
   @override
-  Future<HttpResponse<List<String>>> getLikedPackages() async {
+  Future<HttpResponse<List<String>>> getLikedPackages(
+      dynamic cancelToken) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -205,6 +232,7 @@ class _PubService implements PubService {
               '/account/likes',
               queryParameters: queryParameters,
               data: _data,
+              cancelToken: cancelToken,
             )
             .copyWith(
                 baseUrl: _combineBaseUrls(

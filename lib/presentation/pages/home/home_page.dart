@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:riverpod_layered_architecture/core_packages.dart';
+import 'package:riverpod_layered_architecture/router/routes.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,7 +10,10 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: Text('home page'),
+          child: ElevatedButton(
+            onPressed: () => const SearchRoute().go(context),
+            child: const Text('검색 화면'),
+          )
         ),
       ),
     );
