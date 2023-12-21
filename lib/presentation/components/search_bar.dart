@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({super.key, this.controller});
+class PubSearchBar extends StatelessWidget {
+  const PubSearchBar({
+    super.key,
+    required this.controller,
+  });
 
-  final TextEditingController? controller;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +15,7 @@ class SearchBar extends StatelessWidget {
       child: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset('assets/image/search_background.png', fit: BoxFit.cover),
+            child: Image.asset('assets/images/search_background.png', fit: BoxFit.cover),
           ),
           Center(
             child: Container(

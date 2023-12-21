@@ -17,11 +17,18 @@ class PubUsecase {
 
   final PubRepository repository;
 
-  Future<List<Package>> getPackages(int page, CancelToken? cancelToken) {
+  Future<List<Package>> getPackages({
+    required int page,
+    CancelToken? cancelToken,
+  }) {
     return repository.getPackages(page, cancelToken);
   }
 
-  Future<List<SearchPackage>> searchPackages(int page, String search, CancelToken? cancelToken) {
+  Future<List<SearchPackage>> searchPackages({
+    required int page,
+    required String search,
+    CancelToken? cancelToken,
+  }) {
     return repository.searchPackages(page, search, cancelToken);
   }
 

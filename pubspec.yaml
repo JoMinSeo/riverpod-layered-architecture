@@ -26,6 +26,8 @@ dependencies:
   json_annotation: ^4.8.1
   logger: ^2.0.2+1
   flutter_svg: ^2.0.9
+  flutter_hooks: ^0.20.3
+  shimmer: ^3.0.0
 
 
 dev_dependencies:

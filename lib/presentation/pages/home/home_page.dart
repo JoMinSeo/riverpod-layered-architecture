@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: ElevatedButton(
-            onPressed: () => const SearchRoute().go(context),
+            onPressed: () => const SearchRoute().push(context),
             child: const Text('검색 화면'),
           )
         ),
